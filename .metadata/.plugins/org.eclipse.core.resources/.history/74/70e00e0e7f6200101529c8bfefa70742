@@ -1,0 +1,43 @@
+package application;
+
+import java.util.Locale;
+import java.util.Scanner;
+
+import entities.BackEnd;
+
+public class Program {
+
+	public static void main(String[] args) {
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("Quantas pessoas serao digitadas? ");
+		
+		int n = sc.nextInt();
+		sc.nextLine();
+		BackEnd []vet = new BackEnd[n+1];
+		
+		for(int i=1; i<vet.length; i++) {
+			
+			System.out.printf("Dados da %da pessoa:%n",i);
+			
+			System.out.print("Nome: ");
+			String name = sc.nextLine();
+			
+			System.out.print("Idade: ");
+			int age = sc.nextInt();
+			
+			System.out.print("Altura: ");
+			double height = sc.nextDouble();
+			sc.nextLine();
+			
+			vet[i] = new BackEnd(name, age, height);
+			
+			System.out.println(vet[i].getName()+"-"+vet[i].getAge()+"-"+vet[i].getHeight());
+		}
+		
+		
+		sc.close();
+	}
+
+}

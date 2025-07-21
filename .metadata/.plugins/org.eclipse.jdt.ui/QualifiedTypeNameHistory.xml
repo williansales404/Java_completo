@@ -13,8 +13,8 @@
     <fullyQualifiedTypeName name="entities.System"/>
     <fullyQualifiedTypeName name="entities.BackEndNumber"/>
     <fullyQualifiedTypeName name="entities.BackEndVet"/>
-    <fullyQualifiedTypeName name="entities.BackEnd"/>
-    <fullyQualifiedTypeName name="java.util.Scanner"/>
     <fullyQualifiedTypeName name="entities.BackEndPar"/>
     <fullyQualifiedTypeName name="java.util.Locale"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="entities.BackEnd"/>
 </qualifiedTypeNameHistroy>

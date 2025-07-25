@@ -22,4 +22,5 @@
     <fullyQualifiedTypeName name="entities.BackEndPf"/>
     <fullyQualifiedTypeName name="java.util.Locale"/>
     <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="entities.BackEndPencionato"/>
 </qualifiedTypeNameHistroy>

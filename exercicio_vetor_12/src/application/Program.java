@@ -34,7 +34,6 @@ public class Program {
 		
 		System.out.println();
 		
-		//int maior = 0;
 		for(int i=0; i<10; i++) {
 			//System.out.println(vet[i].getName()+", "+vet[i].getEmail()+", "+vet[i].getPosition());
 			if(vet[i] != null) {

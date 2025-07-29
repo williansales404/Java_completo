@@ -14,17 +14,12 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("How many employees will be registered? ");
-		
 		int n = sc.nextInt();
 		
-		
-		List<Integer> listId = new ArrayList<>();
-		List<Object> listCadastro = new ArrayList<>();
-		List<Double> listSalary = new ArrayList<>();
-		Employer chamaMetodo = new Employer();
-		
-		
+		List<Employer> listCadastro = new ArrayList<>();
+		int cont=1;
 		for(int i=0; i<n; i++) {
+			System.out.printf("Emplyoee#%d:%n",cont++);
 			System.out.print("Id: ");
 			int id = sc.nextInt();
 			sc.nextLine();
@@ -32,40 +27,38 @@ public class Program {
 			String name = sc.nextLine();
 			System.out.print("Salary: ");
 			double salary = sc.nextDouble();
+			System.out.println();
 			
-			Employer p = new Employer(id, name, salary);
-			listCadastro.add(p);
-			
-			listId.add(id);
-			
-			listSalary.add(salary);
-			
+			listCadastro.add(new Employer(id, name, salary));
 		}
-		System.out.println();
 		
+		System.out.println();
 		System.out.print("Enter the employee id that will have salary increase : ");
-		int encontrarIndex = sc.nextInt();
-		int index = listId.indexOf(encontrarIndex);
-		System.out.println();
+		Integer encontrarIndex = sc.nextInt();
+		//Integer x = listCadastro.get(0).getId().compareTo(encontrarIndex);
 		
-		//System.out.println(listSalary.get(index));
-		
-		System.out.print("Enterthe percentage: ");
-		double percent = sc.nextDouble();
-		
-		
-		
-		for(int id: listId) {
-			if(id == encontrarIndex) {
-				System.out.println("sim");
-				double x = listSalary.get(index);
-				double  = chamaMetodo.increaseSalary(x,percent);
-				
+		Integer x=0;
+		Integer position=-1;
+		for(int i=0; i<n; i++) {
+			x = listCadastro.get(i).getId().compareTo(encontrarIndex);
+			if(x == 0) {
+				position = i;
 			}
 		}
 		
-		for(double sal :listSalary ) {
-			System.out.println();
+		Double percent = 0.0;
+		if(position >= 0) {
+			System.out.print("Enterthe percentage: ");
+			percent = sc.nextDouble();
+			listCadastro.get(position).increaseSalary(listCadastro.get(position).getSalary(),percent);
+		} else {
+			System.out.println("This id does not exist!");
+		}
+		
+		System.out.println();
+		
+		for (Employer employer : listCadastro) {
+			System.out.println(employer);
 		}
 		
 		sc.close();

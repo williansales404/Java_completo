@@ -1,22 +1,22 @@
 package application;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+
+import entities.Sistema;
+import entities.SistemaTT;
 
 public class Program {
 
 	public static void main(String[] args) {
 		Locale.setDefault(Locale.US);
 		
-		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		Sistema orderProduct = new Sistema(new SistemaTT("TV", 12.0), 2);
 		
-		String x = "01/";
+//		System.out.println(orderProduct.getSistematt().getName());
+//		System.out.println(orderProduct.getSistematt().getPrice());
+//		System.out.println(orderProduct.getQuantity());
 		
-		String enterDate = x+"10/2025";
-		LocalDate date = LocalDate.parse(enterDate, format);
-		System.out.println(date.getMonthValue());
-		
+		System.out.println(orderProduct.getSistematt().getPrice());
 		
 	}
 }

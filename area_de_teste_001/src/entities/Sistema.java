@@ -1,63 +1,31 @@
 package entities;
 
-import java.time.LocalDate;
-
 public class Sistema {
-	LocalDate date;
-	Double valuePerhour;
-	Integer hours;
+	private SistemaTT sistematt = new SistemaTT();
+	private Integer quantity;
 	
-	
-	
-	public Sistema(LocalDate date, Double valuePerhour, Integer hours) {
-		this.date = date;
-		this.valuePerhour = valuePerhour;
-		this.hours = hours;
+	Sistema(){
 	}
 
-	public LocalDate getDate() {
-		return date;
+	public Sistema(SistemaTT sistematt, Integer quantity) {
+		this.sistematt = sistematt;
+		this.quantity = quantity;
 	}
 
-
-
-	public void setDate(LocalDate date) {
-		this.date = date;
+	public SistemaTT getSistematt() {
+		return sistematt;
 	}
 
-
-
-	public Double getValuePerhour() {
-		return valuePerhour;
+	public void setSistematt(SistemaTT sistematt) {
+		this.sistematt = sistematt;
 	}
 
-
-
-	public void setValuePerhour(Double valuePerhour) {
-		this.valuePerhour = valuePerhour;
+	public Integer getQuantity() {
+		return quantity;
 	}
 
-
-
-	public Integer getHours() {
-		return hours;
-	}
-
-
-
-	public void setHours(Integer hours) {
-		this.hours = hours;
-	}
-
-
-
-	public double totalValue() {
-		return valuePerhour * hours;
-	}
-
-	@Override
-	public String toString() {
-		return "Sistema [date=" + date + ", valuePerhour=" + valuePerhour + ", hours=" + hours + "]";
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 	
 	

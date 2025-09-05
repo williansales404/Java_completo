@@ -2,21 +2,39 @@ package application;
 
 import java.util.Locale;
 
-import entities.Sistema;
-import entities.SistemaTT;
-
 public class Program {
 
 	public static void main(String[] args) {
 		Locale.setDefault(Locale.US);
-		
-		Sistema orderProduct = new Sistema(new SistemaTT("TV", 12.0), 2);
-		
-//		System.out.println(orderProduct.getSistematt().getName());
-//		System.out.println(orderProduct.getSistematt().getPrice());
-//		System.out.println(orderProduct.getQuantity());
-		
-		System.out.println(orderProduct.getSistematt().getPrice());
-		
+
+		class Animal {
+			public void fazBarulho() {
+				System.out.println("silêncio");
+			}
+		}
+		class Dog extends Animal {
+			public void fazBarulho() {
+				System.out.println("au au");
+			}
+		}
+		class Cat extends Animal {
+			public void fazBarulho() {
+				System.out.println("miau");
+			}
+		}
+		Dog dog = new Dog();
+		Animal animal = new Animal();
+		Animal animal2 = new Dog();
+		Animal animal3 = new Cat();
+		dog.fazBarulho();
+		animal.fazBarulho();
+		animal2.fazBarulho(); // concretamente é um cachorro
+		animal3.fazBarulho(); // concretamente é um gato
+		System.out.println("-- Castings agora --");
+		((Animal) dog).fazBarulho(); // upcasting
+		((Dog) animal2).fazBarulho(); // downcasting, funciona
+		((Dog) animal3).fazBarulho(); // downcasting, dá erro porque um gato não é um cachorro
+		((Dog) animal).fazBarulho(); // downcasting, dá erro aqui
+
 	}
 }

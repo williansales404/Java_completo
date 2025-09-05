@@ -14,6 +14,8 @@ import entities.enums.OrderStatus;
 
 public class Program {
 	public static void main(String[] args) {
+		//coreção do exercicio
+		//https://github.com/devsuperior/aulao004
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 		DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");

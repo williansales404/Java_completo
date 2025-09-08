@@ -24,7 +24,7 @@ public class Program {
 		acc2.withdraw(10.0);
 		System.out.println(acc2.getBalance());
 		
-		/*Acima venos um exemplo de polimorfismo onde as variaveis são do mesmo tipo
+		/*Acima vemos um exemplo de polimorfismo onde as variaveis são do mesmo tipo
 		 *mas o objeto especifico e diferente assim como seu comportamento
 		 *resumindo polimorfismo e dar varias formas.*/
 		

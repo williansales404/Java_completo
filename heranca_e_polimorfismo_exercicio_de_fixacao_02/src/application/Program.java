@@ -16,7 +16,7 @@ public class Program {
 
 		List<Person> personType = new ArrayList<Person>();
 
-		System.out.print("Enter the number of tax payers:");
+		System.out.print("Enter the number of tax payers: ");
 		int n = sc.nextInt();
 
 		for (int i = 0; i < n; i++) {

@@ -26,3 +26,5 @@ public abstract class Person {
 	
 	public abstract Double incomeTax();
 }
+//Herança total para subClasses, a classe Person não vai ser instanciada.
+//Neste caso não faz sentido implementa logica no metodo nesta classe gerenerica

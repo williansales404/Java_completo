@@ -41,9 +41,21 @@ public class Reservation {
 		return tp.toDays();
 	}
 
-	public void updateDate(LocalDate checkin, LocalDate checkout) {
+	public String updateDate(LocalDate checkin, LocalDate checkout) {
+
+		LocalDate dateNow = LocalDate.now();
+
+		if (checkin.isBefore(dateNow) || checkout.isBefore(dateNow)) {
+			return "Error in reservation: Reservation dates for update must be future dates";
+		}
+		if (!checkout.isAfter(checkin)) {
+			return "Error in reservation: Check-out date must be after check-in date";
+		}
+
 		this.checkin = checkin;
 		this.checkout = checkout;
+
+		return null;
 	}
 
 	@Override

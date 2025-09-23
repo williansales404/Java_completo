@@ -44,9 +44,9 @@ public class Program {
 
 			String error = reservation.updateDate(checkin, checkout);
 			if (error != null) {
-				System.out.println( error);
+				System.out.println(error);
 			} else {
-				System.out.println("Reservation: "+reservation);
+				System.out.println("Reservation: " + reservation);
 			}
 		}
 		sc.close();

@@ -9,6 +9,7 @@ public class Program {
 	public static void main(String[] args) {
 
 		String path = "C:\\workspace\\in.txt";
+		//Bloco try-with-resources
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 
 			String line = br.readLine(); // ler a linha do arquivo, se estiver na linha final retorna null

@@ -1,0 +1,2 @@
+Arquivo criado 
+para testa a leitura com file

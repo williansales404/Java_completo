@@ -8,7 +8,7 @@ public class Program {
 	// Forma manual de ler e fechar as (stream) e so um exemplo não recomendado usar
 	public static void main(String[] args) {
 
-		String path = "C:\\workspace\\in.txt";
+		String path = "C:\\workspace\\product.csv";
 		//Bloco try-with-resources
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 
@@ -18,6 +18,7 @@ public class Program {
 				System.out.println(line);
 				line = br.readLine(); // tenta ler novamente
 			}
+			
 		} catch (IOException e) {
 			System.out.println("Error: " + e.getMessage());
 		}

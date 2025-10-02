@@ -6,11 +6,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Creat {
+	
+	public Creat() {
+	}
+	
 	public void creatProductCsv(Product p, String caminhoArquivo) {
 		boolean existingFile = new File(caminhoArquivo).exists();
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminhoArquivo, existingFile))) {
-			
-			
 			
 			bw.write(p.getName() + ";" + p.getValue() + ";" + p.getQuantity());
 			

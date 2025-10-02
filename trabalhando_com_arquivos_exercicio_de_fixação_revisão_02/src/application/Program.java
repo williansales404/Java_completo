@@ -35,9 +35,8 @@ public class Program {
 
 			String entrada = sc.nextLine();
 
-			// Encerra o programa quando ler s
 			if (entrada.equalsIgnoreCase("s")) {
-				break;
+				break; // Encerra o programa quando ler s
 			}
 
 			String[] parte = entrada.split(", ");
@@ -45,7 +44,7 @@ public class Program {
 			
 			
 			p = new Product(parte[0], Double.parseDouble(parte[1]), Integer.parseInt(parte[2]));
-
+			
 			wr.creatProductCsv(p, caminhoArquivo);
 		}
 
@@ -57,10 +56,11 @@ public class Program {
 		String newFileStr = fileStr + "\\Out\\sumary.csv"; // com pasta criada agora cria o arquivo
 
 		List<Product> prod = new ArrayList<Product>();
-
+		
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			
-			String line = br.readLine(); // ler a ate a quebra de linha
+			String line = br.readLine(); //considerando que o arquivo tenha cabeçalho
+			line = br.readLine(); // ler a ate a quebra de linha
 			while (line != null) {
 
 				String[] parte = line.split(";");
@@ -73,10 +73,14 @@ public class Program {
 
 				line = br.readLine();
 			}
-			try(BufferedWriter bw = new BufferedWriter(new FileWriter(newFileStr))){
+			
+			//no try esta com segundo argumento false por que toda vez vou extrair o arquivo e fazer total do zero
+			//se não vai acumular informação nova com oque ja havia antes toda vez que roda o programa
+			try(BufferedWriter bw = new BufferedWriter(new FileWriter(newFileStr, false))){
 				
-				bw.write("Nome;Total");
+				bw.write("NOME;TOTAL");
 				bw.newLine();
+				
 				for(Product c: prod) {
 					bw.write(c.getName()+";"+c.totalValue());
 					bw.newLine();

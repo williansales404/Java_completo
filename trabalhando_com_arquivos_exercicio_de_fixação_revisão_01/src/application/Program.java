@@ -29,7 +29,7 @@ public class Program {
 		Product p;
 
 		// Aqui crio o objeto criando o arquivo do zero.
-		String caminhoArquivo = "C:\\workspace\\trabalhando_com_arquivos_exercicio_de_fixação_revisão\\product.csv";
+		String caminhoArquivo = "C:\\workspace\\trabalhando_com_arquivos_exercicio_de_fixação_revisão_01\\product.csv";
 		Creat wr = new Creat();
 		while (true) {
 			System.out.print("Product: ");

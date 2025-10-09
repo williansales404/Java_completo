@@ -17,6 +17,7 @@ public class ContractService {
 		this.onlinePaymentService = onlinePaymentService;
 	}
 	
+	
 	public void processContract(Contract contract, Integer months) {
 
 		//int parcelNumber = months;
@@ -26,7 +27,9 @@ public class ContractService {
 			double valueParcelMonths = onlinePaymentService.interest(valueParcelTax, i);
 			contract.setInstallment(new Installment(contract.getDate().plusMonths(i), valueParcelMonths));
 			
-			System.out.println(contract.getInstallment().getDueDate().format(fmt)+" - "+String.format("%.2f",contract.getInstallment().getAmount()));
+			contract.addlist(new Installment(contract.getDate().plusMonths(i), valueParcelMonths));
+			
+			//System.out.println(contract.getInstallment().getDueDate().format(fmt)+" - "+String.format("%.2f",contract.getInstallment().getAmount()));
 		}
 	}
 }

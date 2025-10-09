@@ -2,10 +2,14 @@ package application;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
 import model.entities.Contract;
+import model.entities.Installment;
 import model.service.ContractService;
 import model.service.PaypalService;
 
@@ -37,6 +41,8 @@ public class Program {
 		ContractService service = new ContractService(new PaypalService());
 		
 		service.processContract(contract, parcelNumber);
+		
+		contract.listContratParcel();
 		
 		sc.close();
 	}

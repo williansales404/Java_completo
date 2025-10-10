@@ -6,39 +6,44 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import model.entities.Contract;
+import model.entities.Installment;
 import model.service.ContractService;
 import model.service.PaypalService;
 
 public class Program {
 
 	public static void main(String[] args) {
-		
-		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Entre os dados do contrato:");
+		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		
+		System.out.println("Entre os dados do contrato: ");
 		System.out.print("Numero: ");
 		int number = sc.nextInt();
 		System.out.print("Data (dd/MM/yyyy): ");
-		sc.nextLine();
-		LocalDate date = LocalDate.parse(sc.nextLine(), fmt);
+		LocalDate date = LocalDate.parse(sc.next(), fmt);
 		System.out.print("Valor do contrato: ");
-		double valueTotal = sc.nextDouble();
+		double valuetotal = sc.nextDouble();
 		
-		Contract contract = new Contract(number, date, valueTotal);
-		
+		Contract obj = new Contract(number, date, valuetotal);
 		System.out.println();
-		System.out.println("Entre com o numero de parcelas:");
-		System.out.print("Parcelas: ");
-		int parcelNumber = sc.nextInt();
+		System.out.print("Entre com o numero de parcelas: ");
+		int months = sc.nextInt();
 		
 		ContractService service = new ContractService(new PaypalService());
 		
-		service.processContract(contract, parcelNumber);
+		service.processContract(obj, months);
 		
-		contract.listContratParcel();
+		System.out.println("Parcelas:");
+		
+		for(Installment installment: obj.getListInstallment()) {
+			System.out.println(installment);
+		}
+		
+		
+		
+		
 		
 		sc.close();
 	}

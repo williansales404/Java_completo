@@ -30,7 +30,5 @@ public class UsedProduct extends Product{
 		return String.format("%s (used) $ %.2f", getName(),getPrice())
 				+" (Manufacturedate: "
 				+manufactureDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))+")";
-		//manufactureDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-		//" (Manufacturedate: "+manufactureDate.format(formatt)+")"
 	}
 }

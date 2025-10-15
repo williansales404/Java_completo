@@ -20,7 +20,7 @@ public class Program {
 		int n = sc.nextInt();
 
 		for (int i = 0; i < n; i++) {
-			System.out.printf("Tax payer #%d data:%n", i + 1);
+			System.out.printf("Tax  payer #%d data:%n", i + 1);
 			System.out.print("Individual or company(i/c)? ");
 			char ch = sc.next().charAt(0);
 			System.out.print("Name: ");

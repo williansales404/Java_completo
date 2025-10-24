@@ -1,7 +1,7 @@
 package application;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -11,18 +11,14 @@ public class Program {
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 		
-		// 25/06/2018 10:30
-		LocalDateTime d05 = LocalDateTime.parse("2018-06-25T10:30:00");
-		LocalDateTime pastWeekLocalDateTime = d05.minusDays(7);
+		List<Integer> x = new ArrayList<Integer>();
 		
-		Duration t2 = Duration.between(pastWeekLocalDateTime, d05);
+		x.add(10);
 		
-		 //25/06/2018 14:40
-		Duration t3 = Duration.between(d05, LocalDateTime.parse("2018-06-27T11:40:00"));
+		for(Integer c : x) {
+			System.out.println(c.compareTo(10));
+		}
 		
-		
-		System.out.println();
-
 		sc.close();
 	}
 }

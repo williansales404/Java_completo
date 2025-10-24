@@ -41,10 +41,6 @@ public class Program {
 			System.out.println(installment);
 		}
 		
-		
-		
-		
-		
 		sc.close();
 	}
 

@@ -1,9 +1,293 @@
- Maria Brown,4300.00
- Alex Green,3100.00
- Bob Grey,3100.00
- Anna White,3500.00
- Alex Black,2450.00
- Eduardo Rose,4390.00
- Willian Red,2900.00
- Marta Blue,6100.00
- Alex Brown,5000.00
+🛠️ Estrutura da API
+1. Modelos (Models)
+csharp
+public class Usuario
+{
+    public int Id { get; set; }
+    public string Nome { get; set; }
+    public string RU { get; set; }
+    public string Curso { get; set; }
+    public string Login { get; set; }
+    public string Senha { get; set; }
+}
+
+public class Livro
+{
+    public int Id { get; set; }
+    public string Titulo { get; set; }
+    public string Autor { get; set; }
+    public string Editora { get; set; }
+    public int Ano { get; set; }
+}
+2. Contexto do Banco (DbContext)
+csharp
+public class ApiDbContext : DbContext
+{
+    public ApiDbContext(DbContextOptions<ApiDbContext> options) : base(options) { }
+
+    public DbSet<Usuario> Usuarios { get; set; }
+    public DbSet<Livro> Livros { get; set; }
+}
+3. Controladores (Controllers)
+Autenticação
+csharp
+[ApiController]
+[Route("api/[controller]")]
+public class AuthController : ControllerBase
+{
+    private readonly ApiDbContext _context;
+
+    public AuthController(ApiDbContext context)
+    {
+        _context = context;
+    }
+
+    [HttpPost("login")]
+    public IActionResult Login([FromBody] Usuario login)
+    {
+        var user = _context.Usuarios.FirstOrDefault(u => u.Login == login.Login && u.Senha == login.Senha);
+        if (user == null)
+            return Unauthorized("Login ou senha inválidos");
+
+        return Ok("Autenticado com sucesso");
+    }
+}
+Livros
+csharp
+[ApiController]
+[Route("api/[controller]")]
+public class LivrosController : ControllerBase
+{
+    private readonly ApiDbContext _context;
+
+    public LivrosController(ApiDbContext context)
+    {
+        _context = context;
+    }
+
+    [HttpGet]
+    public IActionResult GetLivros() => Ok(_context.Livros.ToList());
+
+    [HttpPost]
+    public IActionResult AddLivro([FromBody] Livro livro)
+    {
+        _context.Livros.Add(livro);
+        _context.SaveChanges();
+        return Ok(livro);
+    }
+
+    [HttpPut("{id}")]
+    public IActionResult UpdateLivro(int id, [FromBody] Livro livro)
+    {
+        var livroExistente = _context.Livros.Find(id);
+        if (livroExistente == null) return NotFound();
+
+        livroExistente.Titulo = livro.Titulo;
+        livroExistente.Autor = livro.Autor;
+        livroExistente.Editora = livro.Editora;
+        livroExistente.Ano = livro.Ano;
+
+        _context.SaveChanges();
+        return Ok(livroExistente);
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult DeleteLivro(int id)
+    {
+        var livro = _context.Livros.Find(id);
+        if (livro == null) return NotFound();
+
+        _context.Livros.Remove(livro);
+        _context.SaveChanges();
+        return Ok("Livro excluído");
+    }
+}
+4. Livros Iniciais
+csharp
+// No método Seed ou Migration
+_context.Livros.AddRange(
+    new Livro { Titulo = "Programação Back End II", Autor = "LEDUR, Cleverson Lopes", Editora = "SAGAH", Ano = 2019 },
+    new Livro { Titulo = "Programação Back End III", Autor = "FREITAS, Pedro H. Chagas", Editora = "SAGAH", Ano = 2021 },
+    new Livro { Titulo = "Ajax, RICH Internet Applications", Autor = "DEITEL, Paul J.", Editora = "Pearson Prentice Hall", Ano = 2008 }
+);
+_context.SaveChanges();
+5. Exclusão e Adição de Livro
+csharp
+// Exclusão
+var livroLedur = _context.Livros.FirstOrDefault(l => l.Autor.Contains("LEDUR"));
+if (livroLedur != null)
+{
+    _context.Livros.Remove(livroLedur);
+    _context.SaveChanges();
+}
+
+// Adição
+_context.Livros.Add(new Livro
+{
+    Titulo = "Desenvolvimento de Aplicações para Internet",
+    Autor = "MARINHO, Antonio Lopes",
+    Editora = "Pearson Education do Brasil",
+    Ano = 2016
+});
+_context.SaveChanges();
+Se quiser, posso gerar uma imagem simulando a página web com os dados dos livros e autenticação. Deseja que eu faça isso agora?
+
+sim
+
+
+
+
+Aqui está a imagem simulando a interface da sua API web RESTful com autenticação e manipulação dos dados dos livros. Ela mostra:
+
+🔐 Um formulário de login com seu nome de usuário e senha (RU)
+
+📚 Uma tabela com os livros do curso, incluindo o novo livro adicionado
+
+🧹 Botões para excluir, editar e adicionar livros
+
+Você pode usar essa imagem como parte da entrega do seu trabalho. Se quiser, posso te ajudar a montar o documento final com o código e essa imagem embutida. Deseja que eu faça isso?
+
+gera pra min o index.html com css integrado com o codigo
+Claro, Willian! Aqui está um exemplo de um arquivo index.html com CSS integrado que simula a interface da sua API RESTful. Ele inclui:
+
+Formulário de login com seu sobrenome como usuário e RU como senha
+
+Tabela com os livros fictícios
+
+Botões para excluir e adicionar livros
+
+📄 index.html
+html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteca Sagah - API Back-End</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .login-container, .livros-container {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        .excluir-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .adicionar-btn {
+            display: block;
+            margin: 20px auto 0;
+            background-color: #2ecc71;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>API Back-End - UNINTER</h1>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <label for="login">Login:</label>
+        <input type="text" id="login" value="siswillian">
+
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" value="1234567">
+
+        <button onclick="alert('Login realizado com sucesso!')">Login</button>
+    </div>
+
+    <div class="livros-container">
+        <h2>Biblioteca Sagah</h2>
+        <table>
+            <tr>
+                <th>Livro</th>
+                <th>Autor</th>
+                <th>Editora</th>
+                <th>Ano</th>
+                <th>Ação</th>
+            </tr>
+            <tr>
+                <td>Programação Back End III</td>
+                <td>FREITAS, Pedro H. Chagas</td>
+                <td>SAGAH</td>
+                <td>2021</td>
+                <td><button class="excluir-btn">Excluir</button></td>
+            </tr>
+            <tr>
+                <td>Ajax, RICH Internet Applications</td>
+                <td>DEITEL, Paul J.</td>
+                <td>Pearson Prentice Hall</td>
+                <td>2008</td>
+                <td><button class="excluir-btn">Excluir</button></td>
+            </tr>
+            <tr>
+                <td>Desenvolvimento de Aplicações para Internet</td>
+                <td>MARINHO, Antonio Lopes</td>
+                <td>Pearson Education do Brasil</td>
+                <td>2016</td>
+                <td><button class="excluir-btn">Excluir</button></td>
+            </tr>
+        </table>
+
+        <button class="adicionar-btn">Adicionar Livro</button>
+    </div>
+
+</body>
+</html>
+Se quiser, posso te ajudar a conectar esse front-end à sua API em C# usando JavaScript com fetch() para chamadas HTTP. Quer que eu te mostre como fazer isso também?

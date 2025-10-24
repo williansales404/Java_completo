@@ -26,10 +26,11 @@ public class ContractService {
 		for (int i = 1; i <= months; i++) {
 			
 			LocalDate date = contract.getDate().plusMonths(i);
-			double paymentFee = onlinePaymentService.paymentFee(valueParcel);
-			double paymentInterest = onlinePaymentService.interest(paymentFee, i);
 			
-			contract.getListInstallment().add(new Installment(date, paymentInterest));
+			double paymentInterest = valueParcel + onlinePaymentService.interest(valueParcel, i);
+			double paymentFee = paymentInterest + onlinePaymentService.paymentFee(paymentInterest);
+			
+			contract.getListInstallment().add(new Installment(date, paymentFee));
 		}
 
 	}

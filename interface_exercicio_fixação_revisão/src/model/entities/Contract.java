@@ -47,13 +47,4 @@ public class Contract {
 	public List<Installment> getListInstallment() {
 		return listInstallment;
 	}
-	
-	public void addInstallment(Installment instamnet) {
-		listInstallment.add(instamnet);
-	}
-	
-	public boolean removeInstalment(Installment installment) {
-		return listInstallment.remove(installment);
-	}
-	
 }

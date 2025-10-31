@@ -1,24 +1,12 @@
 package application;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
+import java.time.Instant;
 
 public class Program {
 
 	public static void main(String[] args) {
-		Locale.setDefault(Locale.US);
-		Scanner sc = new Scanner(System.in);
+		Instant d05 = Instant.parse("2018-08-26T20:45:08Z");
 		
-		List<Integer> x = new ArrayList<Integer>();
-		
-		x.add(10);
-		
-		for(Integer c : x) {
-			System.out.println(c.compareTo(10));
-		}
-		
-		sc.close();
+		System.out.println(d05.toString());
 	}
 }

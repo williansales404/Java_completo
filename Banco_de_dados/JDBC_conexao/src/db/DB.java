@@ -7,55 +7,46 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-//Class criada para ler o arquivo db.properties
+//Class criada fazer conexão com banco de dados
 public class DB {
-	// Objeto criado do tipo Connection com valor NULL
+	// Objeto criado do tipo Connection
 	private static Connection conn = null;
 
 	// Metodo para estabelecer conexão com banco de dados
 	public static Connection getConnection() {
-
-		if (conn == null) {// se a conexão for null ele tenta conectar
-			try { // caso lance exceção
-					// Variavel do tipo Properties recebe retorno da leitura
-					// Metodo de leitura loadProperties()
+		if (conn == null) {
+			try {
+				//Recebe arquivo em formato chave=valor
 				Properties props = loadProperties();
-				// metodo getProperty() ler a url do arquivo
+				// Pega a url do banco de dados passando a chave
 				String url = props.getProperty("dburl");
-
-				// DriverManager.getConnection(url, props) faz a conexão da aplicação
-				// com banco de dados
+				// Estabelece a conexão com o banco de dados
 				conn = DriverManager.getConnection(url, props);
 			} catch (SQLException e) {
 				throw new DbException(e.getMessage());
 			}
 		}
-		// retorna a conexão
 		return conn;
 	}
 
-	// Metodo para ler o arquivo "db.properties"
+	// Metodo ler o arquivo db.properties
 	private static Properties loadProperties() {
-		// FileInputStream ler byte a byte do arquivo "db.properties"
+		// FileInputStream classe de baixo nível que lê dados em bytes do arquivo.
 		try (FileInputStream fs = new FileInputStream("db.properties")) {
-			Properties props = new Properties();// Objeto criado do tipo Properties
-			/*
-			 * os bytes são convertidos em caracteres e depois analisados como pares
-			 * chave=valor. em props.load(fs);
-			 */
-			props.load(fs);
-			return props; // retorna um objeto do tipo properties
+			// Objeto do tipo Properties para ler o arquivo
+			Properties props = new Properties();
+			// ler o arquivo em byte e converte para caracteres
+			props.load(fs);// linhas no formato chave=valor
+			return props;
 		} catch (IOException e) {
-			// Chama a exception personalizada
 			throw new DbException(e.getMessage());
 		}
 	}
 
 	// Metodo usado para fechar conexão com banco de dados
 	public static void closeConnection() {
-		// Verifica se ainda esta conectado
-		if (conn != null) {
-			try { // como pode lançar exception usa o try
+		if (conn != null) {// Verifica se a esta aberta
+			try {
 				conn.close(); // fecha a conexão
 			} catch (SQLException e) {
 				throw new DbException(e.getMessage());

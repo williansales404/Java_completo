@@ -45,7 +45,7 @@ public class DB {
 
 	// Metodo usado para fechar conexão com banco de dados
 	public static void closeConnection() {
-		if (conn != null) {// Verifica se a esta aberta
+		if (conn != null) {// Verifica se a conexão esta aberta
 			try {
 				conn.close(); // fecha a conexão
 			} catch (SQLException e) {

@@ -34,9 +34,10 @@ public class Program {
 		} catch (SQLException e) {
 			throw new DbException(e.getMessage());
 		} finally {
-			DB.closeConnection();
 			DB.closeStatement(st);
 			DB.closeResultSet(rs);
+			//Conexão com banco de dados sempre fechar por ultimo
+			DB.closeConnection();
 		}
 	}
 

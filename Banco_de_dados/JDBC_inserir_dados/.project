@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>programação_funcional_e_expressões_lambda-exercicio_solução_professor</name>
+	<name>JDBC_inserir_dados</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -16,7 +16,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1764080861520</id>
+			<id>1764081338410</id>
 			<name></name>
 			<type>30</type>
 			<matcher>

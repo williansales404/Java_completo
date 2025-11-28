@@ -1,1 +1,117 @@
-/.metadata/
+.metadata/
+
+# Criado por https://www.toptal.com/developers/gitignore/api/eclipse,java,visualstudiocode
+# Edite em https://www.toptal.com/developers/gitignore?templates=eclipse,java,visualstudiocode
+
+### Eclipse ###
+.metadados
+lixeira/
+temporário/
+*.tmp
+*.bak
+*.swp
+*~.nib
+propriedades locais
+.configurações/
+.loadpath
+.recomendadores
+
+# Construtores de ferramentas externas
+.externalToolBuilders/
+
+# Configurações de inicialização do Eclipse armazenadas localmente
+*.lançar
+
+# Específico para PyDev (IDE Python para Eclipse)
+*.pydevproject
+
+# Ferramentas de desenvolvimento específicas para CDT (C/C++)
+.cproject
+
+# CDT- ferramentas automáticas
+.autotools
+
+# Processador de anotações Java (APT)
+.caminho_da_fábrica
+
+# Específico para PDT (Ferramentas de Desenvolvimento PHP)
+.buildpath
+
+# plugin sbteclipse
+.alvo
+
+# Plugin Tern
+.tern-project
+
+Plugin TeXlipse
+.texlipse
+
+# STS (Spring Tool Suite)
+.feijões da primavera
+
+# Recomendadores de código
+.recomendadores/
+
+# Processamento de Anotações
+.apt_generated/
+.apt_generated_test/
+
+# Específico para Scala IDE (desenvolvimento em Scala e Java para Eclipse)
+.cache-main
+.scala_dependencies
+.planilha
+
+# Remova o comentário desta linha se desejar ignorar o arquivo de descrição do projeto.
+Normalmente, este arquivo seria rastreado se contivesse configurações de compilação/dependência:
+#.projeto
+
+### Patch do Eclipse ###
+# Ferramentas Spring Boot
+.sts4-cache/
+
+### Java ###
+# Arquivo de classe compilado
+*.aula
+
+# Arquivo de log
+*.registro
+
+# Arquivos BlueJ
+*.ctxt
+
+# Ferramentas móveis para Java (J2ME)
+.mtj.tmp/
+
+# Arquivos do pacote #
+*.jar
+*.guerra
+*.nar
+*.orelha
+*.zip
+*.tar.gz
+*.rar
+
+# Para obter os registros de falhas da máquina virtual, consulte http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+replay_pid*
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Histórico Local para Visual Studio Code
+.história/
+
+# Extensões do Visual Studio Code criadas
+*.vsix
+
+### Patch do Visual Studio Code ###
+# Ignorar todo o histórico local dos arquivos
+.história
+.ionídeo
+
+# Fim de https://www.toptal.com/developers/gitignore/api/eclipse,java,visualstudiocode

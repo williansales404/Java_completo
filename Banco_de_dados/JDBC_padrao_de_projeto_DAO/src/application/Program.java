@@ -1,8 +1,10 @@
 package application;
 
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import db.DB;
 import model.dao.DaoFactory;
 import model.dao.SellerDao;
 import model.entities.Department;
@@ -11,6 +13,7 @@ import model.entities.Seller;
 public class Program {
 
 	public static void main(String[] args) {
+		
 		
 		Department dp = new Department(1, "Books");
 		

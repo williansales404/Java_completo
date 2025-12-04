@@ -5,6 +5,7 @@ import java.util.List;
 import model.dao.SellerDao;
 import model.entities.Seller;
 
+//Classe Compri contrato com SellerDao
 public class SellerDaoJDBC implements SellerDao {
 
 	@Override

@@ -17,6 +17,7 @@ public class Seller implements Serializable {
 	private LocalDate birthDate;
 	private Double baseSalary;
 
+	//Composicao de objeto Departamento
 	private Department department;
 
 	public Seller() {

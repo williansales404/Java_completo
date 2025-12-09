@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,10 +30,48 @@ public class SellerDaoJDBC implements SellerDao {
 		this.conn = conn;
 	}
 
+	// Insere um novo vendedor no banco de dados
 	@Override
 	public void insert(Seller sl) {
-		// TODO Auto-generated method stub
-
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("""
+					INSERT INTO seller
+					(Name, Email, BirthDate, BaseSalary, DepartmentId)
+					VALUES
+					(?, ?, ?, ?, ?)
+								""",Statement.RETURN_GENERATED_KEYS);
+			st.setString(1, sl.getName());
+			st.setString(2, sl.getName());
+			//st.setObject(3, sl.getBirthDate());
+			st.setObject(3, java.sql.Date.valueOf(sl.getBirthDate())); // Convertendo LocalDate para java.sql.Date
+			st.setDouble(4, sl.getBaseSalary());
+			st.setInt(5, sl.getDepartment().getId());
+			// Executando o comando
+			// Retorna o numero de linhas afetadas
+			int rowsAffected = st.executeUpdate();
+			// Verificando se o insert foi realizado com sucesso
+			if(rowsAffected > 0) {
+				// Recuperando a chave gerada
+				ResultSet rs = st.getGeneratedKeys();
+				// Verificando se retornou algum valor
+				if(rs.next()) {
+					// Pegando o valor da chave gerada
+					int id = rs.getInt(1);
+					// Setando o id do vendedor
+					sl.setId(id);
+				}
+				DB.closeResultSet(rs);
+			}
+			else {
+				throw new DbException("Unexpected error");
+			}
+			
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		} finally {
+			DB.closeStatement(st);
+		}
 	}
 
 	@Override
@@ -104,7 +143,7 @@ public class SellerDaoJDBC implements SellerDao {
 			// Mapa para evitar a criacao de multiplos departamentos
 			// Cada departamento sera instanciado uma unica vez
 			Map<Integer, Department> map = new HashMap<>();
-			
+
 			// Percorrendo o ResultSet e instanciando os vendedores
 			// Adicionando na lista de vendedores
 			while (rs.next()) {
@@ -112,10 +151,10 @@ public class SellerDaoJDBC implements SellerDao {
 				// Se ja foi instanciado, recupera do mapa
 				Department dep = map.get(rs.getInt("DepartmentId"));
 				// Se nao foi instanciado, instancia e adiciona no mapa
-				if(dep == null) {
-					// Instanciando o Departamento	
+				if (dep == null) {
+					// Instanciando o Departamento
 					dep = instanceDepartment(rs);
-					// Adicionando no mapa 
+					// Adicionando no mapa
 					// Chave: Id do departamento
 					// Valor: Departamento instanciado
 					map.put(rs.getInt("DepartmentId"), dep);
@@ -157,7 +196,7 @@ public class SellerDaoJDBC implements SellerDao {
 			// Mapa para evitar a criacao de multiplos departamentos
 			// Cada departamento sera instanciado uma unica vez
 			Map<Integer, Department> map = new HashMap<>();
-			
+
 			// Percorrendo o ResultSet e instanciando os vendedores
 			// Adicionando na lista de vendedores
 			while (rs.next()) {
@@ -165,10 +204,10 @@ public class SellerDaoJDBC implements SellerDao {
 				// Se ja foi instanciado, recupera do mapa
 				Department dep = map.get(rs.getInt("DepartmentId"));
 				// Se nao foi instanciado, instancia e adiciona no mapa
-				if(dep == null) {
-					// Instanciando o Departamento	
+				if (dep == null) {
+					// Instanciando o Departamento
 					dep = instanceDepartment(rs);
-					// Adicionando no mapa 
+					// Adicionando no mapa
 					// Chave: Id do departamento
 					// Valor: Departamento instanciado
 					map.put(rs.getInt("DepartmentId"), dep);

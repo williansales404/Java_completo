@@ -1,14 +1,13 @@
 package application;
 
+import db.DB;
+import db.DbException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.format.DateTimeFormatter;
-
-import db.DB;
-import db.DbException;
 
 //Diferença entre PrepareStatement vs Statement
 //https://pt.stackoverflow.com/questions/99620/qual-a-diferen%C3%A7a-entre-o-statement-e-o-preparedstatemen

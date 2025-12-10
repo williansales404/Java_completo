@@ -40,10 +40,10 @@ public class SellerDaoJDBC implements SellerDao {
 					(Name, Email, BirthDate, BaseSalary, DepartmentId)
 					VALUES
 					(?, ?, ?, ?, ?)
-								""",Statement.RETURN_GENERATED_KEYS);
+								""", Statement.RETURN_GENERATED_KEYS);
 			st.setString(1, sl.getName());
-			st.setString(2, sl.getName());
-			//st.setObject(3, sl.getBirthDate());
+			st.setString(2, sl.getEmail());
+			// st.setObject(3, sl.getBirthDate());
 			st.setObject(3, java.sql.Date.valueOf(sl.getBirthDate())); // Convertendo LocalDate para java.sql.Date
 			st.setDouble(4, sl.getBaseSalary());
 			st.setInt(5, sl.getDepartment().getId());
@@ -51,22 +51,21 @@ public class SellerDaoJDBC implements SellerDao {
 			// Retorna o numero de linhas afetadas
 			int rowsAffected = st.executeUpdate();
 			// Verificando se o insert foi realizado com sucesso
-			if(rowsAffected > 0) {
+			if (rowsAffected > 0) {
 				// Recuperando a chave gerada
 				ResultSet rs = st.getGeneratedKeys();
 				// Verificando se retornou algum valor
-				if(rs.next()) {
+				if (rs.next()) {
 					// Pegando o valor da chave gerada
 					int id = rs.getInt(1);
 					// Setando o id do vendedor
 					sl.setId(id);
 				}
 				DB.closeResultSet(rs);
-			}
-			else {
+			} else {
 				throw new DbException("Unexpected error");
 			}
-			
+
 		} catch (SQLException e) {
 			throw new DbException(e.getMessage());
 		} finally {
@@ -76,8 +75,30 @@ public class SellerDaoJDBC implements SellerDao {
 
 	@Override
 	public void update(Seller sl) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("""
+					UPDATE seller
+					SET Name = ?, Email = ?, BirthDate = ?, BaseSalary = ?, DepartmentId = ?
+					WHERE Id = ?
+					""");
+			st.setString(1, sl.getName());
+			st.setString(2, sl.getEmail());
+			// st.setObject(3, sl.getBirthDate());
+			st.setObject(3, java.sql.Date.valueOf(sl.getBirthDate())); // Convertendo LocalDate para java.sql.Date
+			st.setDouble(4, sl.getBaseSalary());
+			st.setInt(5, sl.getDepartment().getId());
+			st.setInt(6, sl.getId());
 
+			// Executando o comando
+			// Retorna o numero de linhas afetadas
+			st.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		} finally {
+			DB.closeStatement(st);
+		}
 	}
 
 	@Override
